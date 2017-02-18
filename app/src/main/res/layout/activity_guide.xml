@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_guide"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.bandeng.mynews.activity.GuideActivity">
@@ -9,7 +8,10 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_guide_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
     <Button
         android:id="@+id/btn_guide_open"
@@ -22,4 +24,27 @@
         android:text="@string/guide_btn_text"
         android:textColor="@color/guide_btn_text_color_selector"
         android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/large_30">
+
+        <LinearLayout
+            android:id="@+id/ll_container_gray_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+
+        <View
+            android:id="@+id/img_guide_red_point"
+            android:layout_width="@dimen/small_10"
+            android:layout_height="@dimen/small_10"
+            android:background="@drawable/guide_red_point_shape" />
+
+    </RelativeLayout>
+
+
 </RelativeLayout>
