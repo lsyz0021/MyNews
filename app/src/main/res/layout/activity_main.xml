@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.bandeng.mynews.MainActivity">
+
+    <com.viewpagerindicator.TabPageIndicator
+        android:id="@+id/tab_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/default_line_indicator_selected_color">
+
+    </com.viewpagerindicator.TabPageIndicator>
+
+    <com.bandeng.mynews.view.NoScrollViewPager
+        android:id="@+id/vp_ViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/rg_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_tab_bg"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_tab_home"
+            style="@style/rb_tab_style"
+            android:checked="true"
+            android:drawableTop="@drawable/tab_home_selector"
+            android:text="@string/tab_text_home" />
+
+        <RadioButton
+            android:id="@+id/rb_tab_newscenter"
+            style="@style/rb_tab_style"
+            android:drawableTop="@drawable/tab_newscenter_selector"
+            android:text="@string/tab_text_newscenter" />
+
+        <RadioButton
+            android:id="@+id/rb_tab_smartservice"
+            style="@style/rb_tab_style"
+            android:drawableTop="@drawable/tab_smartservice_selector"
+            android:text="@string/tab_text_smartservice" />
+
+        <RadioButton
+            android:id="@+id/rb_tab_govaffairs"
+            style="@style/rb_tab_style"
+            android:drawableTop="@drawable/tab_govaffairs_selector"
+            android:text="@string/tab_text_govaffairs" />
+
+        <RadioButton
+            android:id="@+id/rb_tab_setting"
+            style="@style/rb_tab_style"
+            android:drawableTop="@drawable/tab_setting_selector"
+            android:text="@string/tab_text_setting" />
+    </RadioGroup>
+</LinearLayout>
