@@ -1,4 +1,4 @@
-package com.bandeng.mynews;
+package com.bandeng.mynews.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.bandeng.mynews.R;
 import com.bandeng.mynews.adapter.TabPagerAdapter;
 import com.bandeng.mynews.fragment.GovaffairsFragment;
 import com.bandeng.mynews.fragment.HomeFragment;
