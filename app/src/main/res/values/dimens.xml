@@ -5,7 +5,7 @@
 
     <dimen name="tab_rb_5dp">5dp</dimen>
 
-    <dimen name="_5dp">10dp</dimen>
+    <dimen name="tab_5dp">10dp</dimen>
 
     <dimen name="small_5">5dp</dimen>
     <dimen name="small_10">10dp</dimen>
@@ -13,6 +13,8 @@
     <dimen name="middle_20">20dp</dimen>
     <dimen name="large_25">25dp</dimen>
     <dimen name="large_30">30dp</dimen>
+    <dimen name="large_50">50dp</dimen>
+    <dimen name="large_60">60dp</dimen>
 
     <dimen name="text_size_10sp">10sp</dimen>
     <dimen name="text_size_12sp">12sp</dimen>

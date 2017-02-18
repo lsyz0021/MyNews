@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     private RadioGroup rg_radio_group;
     private TabPageIndicator tabIndicator;
 
-    private String[] tab_title = {"新闻", "推荐", "视频", "北京", "直播"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     }
 
     private void initData() {
-
+        String[] tab_title = {"新闻", "推荐", "视频", "北京", "直播"};
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new NewsCenterFragment());
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         fragments.add(new GovaffairsFragment());
         fragments.add(new SettingFragment());
 
-        TabPagerAdapter pagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), fragments,tab_title);
+        TabPagerAdapter pagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), fragments, tab_title);
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.addOnPageChangeListener(this);
 
@@ -111,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
     }
 
     @Override
@@ -137,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     @Override
     public void onPageScrollStateChanged(int state) {
-
     }
 
     @Override

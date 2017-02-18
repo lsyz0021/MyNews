@@ -1,7 +1,6 @@
 package com.bandeng.mynews.activity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -47,12 +46,9 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // 隐藏状态栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_splash);
-        // 去掉全屏
-        View decorView = getWindow().getDecorView();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-        }
+
         ImageView imageView = (ImageView) findViewById(R.id.iv_splash);
         time = (TextView) findViewById(R.id.tv_time);
         // 点击跳过
