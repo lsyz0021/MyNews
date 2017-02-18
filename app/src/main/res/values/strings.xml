@@ -1,11 +1,13 @@
 <resources>
-    <string name="app_name">News</string>
+    <string name="app_name">今日新闻</string>
 
     <string name="tab_text_home">首页</string>
     <string name="tab_text_newscenter">新闻中心</string>
-    <string name="tab_text_smartservice">智慧服务</string>
+    <string name="tab_text_smartservice">开心服务</string>
     <string name="tab_text_govaffairs">政务</string>
-    <string name="tab_text_setting">设置</string>
+    <string name="tab_text_setting">我</string>
+
+    <string name="time_text">跳过0s</string>
 
 
 </resources>
