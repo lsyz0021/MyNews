@@ -1,6 +1,5 @@
 package com.bandeng.mynews.fragment;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,7 +19,6 @@ public class GovaffairsFragment extends BaseFragment implements BaseLoadNetData 
 
         setMenuIsShow(true);
         setTypeIsShow(true);
-        Log.e("tag", "Govaffairs");
     }
 
     @Override
