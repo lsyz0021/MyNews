@@ -5,5 +5,5 @@ package com.bandeng.mynews.base;
  */
 
 public interface BaseLoadNetData {
-    void loadNetData(String url);
+    void loadNetData();
 }

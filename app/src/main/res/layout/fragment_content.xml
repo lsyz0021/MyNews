@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_red_bg"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/img_fragment_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_10"
+            android:background="@drawable/img_menu" />
+
+        <TextView
+            android:id="@+id/tv_fragment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/app_name"
+            android:textColor="@color/color_tab_text_normal"
+            android:textSize="@dimen/text_size_18sp" />
+
+        <ImageButton
+            android:id="@+id/img_fragment_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/small_10"
+            android:background="@drawable/icon_pic_grid_type" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
