@@ -7,6 +7,9 @@ package com.bandeng.mynews.utils;
 public interface MyConstant {
 
     String ISFIRSTOPEN = "guideIsFirstOpen";
-    String BASEURL = "http://192.168.1.56:8080";
-    String home = "/zhbj/";
+    String BASEURL = "http://192.168.1.5:8080";
+    // 新闻中心分类接口
+    String CATEGORIES = BASEURL + "/zhbj/categories.json";
+
+
 }

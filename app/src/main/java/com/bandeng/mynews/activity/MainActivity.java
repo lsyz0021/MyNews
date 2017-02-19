@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -12,6 +11,7 @@ import com.bandeng.mynews.R;
 import com.bandeng.mynews.adapter.TabPagerAdapter;
 import com.bandeng.mynews.base.BaseFragment;
 import com.bandeng.mynews.base.BaseLoadNetData;
+import com.bandeng.mynews.bean.NewsCenterBean;
 import com.bandeng.mynews.fragment.GovaffairsFragment;
 import com.bandeng.mynews.fragment.HomeFragment;
 import com.bandeng.mynews.fragment.NewsCenterFragment;
@@ -19,13 +19,10 @@ import com.bandeng.mynews.fragment.SettingFragment;
 import com.bandeng.mynews.fragment.SmartServiceFragment;
 import com.bandeng.mynews.view.NoScrollViewPager;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
 import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
-
-import okhttp3.Response;
+import java.util.List;
 
 import static android.widget.RadioGroup.OnCheckedChangeListener;
 
@@ -42,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     private TabPageIndicator tabIndicator;
     private ArrayList<Fragment> fragments;
 
+    // 新闻中心menu bean list集合
+    private List<NewsCenterBean.NewsCenterMenuBean> newsCenterMenuBeanList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,17 +101,6 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         mViewPager.addOnPageChangeListener(this);
 
         tabIndicator.setViewPager(mViewPager);
-
-        OkGo.get("https://www.baidu.com/s?wd=s")
-                .tag(this)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(String s, okhttp3.Call call, Response response) {
-                        Log.e("tag", "onSuccess: = " + response.code());
-                        Log.e("tag", "onSuccess: = " + response.message());
-                        Log.e("tag", "onSuccess: = " + response.body());
-                    }
-                });
 
     }
 
@@ -177,13 +165,18 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         // 切换是联网获取数据
         BaseFragment fragment = (BaseFragment) fragments.get(item);
         if (fragment instanceof BaseLoadNetData) {
-            ((BaseLoadNetData)fragment).loadNetData();
+            ((BaseLoadNetData) fragment).loadNetData();
         }
 
     }
 
     public SlidingMenu getSlidingMenu() {
         return slidingMenu;
+    }
+
+    // 设置新闻中心menu bean list集合
+    public void setNewsCenterMenuBeanList(List<NewsCenterBean.NewsCenterMenuBean> newsCenterMenuBeanList) {
+        this.newsCenterMenuBeanList = newsCenterMenuBeanList;
     }
 
 }
