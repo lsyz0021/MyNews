@@ -10,6 +10,8 @@ import android.widget.RadioGroup;
 
 import com.bandeng.mynews.R;
 import com.bandeng.mynews.adapter.TabPagerAdapter;
+import com.bandeng.mynews.base.BaseFragment;
+import com.bandeng.mynews.base.BaseLoadNetData;
 import com.bandeng.mynews.fragment.GovaffairsFragment;
 import com.bandeng.mynews.fragment.HomeFragment;
 import com.bandeng.mynews.fragment.NewsCenterFragment;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     private SlidingMenu slidingMenu;
     private RadioGroup rg_radio_group;
     private TabPageIndicator tabIndicator;
+    private ArrayList<Fragment> fragments;
 
 
     @Override
@@ -56,11 +59,16 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         // 设置侧滑方向
         slidingMenu.setMode(SlidingMenu.LEFT);
         // 设置全屏可以划出菜单
-        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
         // 设置侧滑菜单的宽度
-        slidingMenu.setBehindWidth(300);
+//        slidingMenu.setBehindWidth(Uiutil.dip2px(this, 150));
+        // 设置SlidingMenu离屏幕的偏移量
+        slidingMenu.setBehindOffsetRes(R.dimen.large_80);
         // 把侧滑菜单添加到activity中
         slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        // 设置渐入渐出效果的值
+        slidingMenu.setFadeEnabled(true);
+        slidingMenu.setFadeDegree(0.5f);
         // 设置侧滑菜单的布局
         slidingMenu.setMenu(R.layout.main_menu);
     }
@@ -82,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     private void initData() {
         String[] tab_title = {"新闻", "推荐", "视频", "北京", "直播"};
-        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new NewsCenterFragment());
         fragments.add(new SmartServiceFragment());
@@ -137,24 +145,45 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     public void onPageScrollStateChanged(int state) {
     }
 
+    // RadioButton选择监听器
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
+        int item = 0;
         switch (checkedId) {
             case R.id.rb_tab_home:
-                mViewPager.setCurrentItem(0);
+                slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+                item = 0;
                 break;
             case R.id.rb_tab_newscenter:
-                mViewPager.setCurrentItem(1);
+                slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+                item = 1;
                 break;
             case R.id.rb_tab_smartservice:
-                mViewPager.setCurrentItem(2);
+                slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+                item = 2;
                 break;
             case R.id.rb_tab_govaffairs:
-                mViewPager.setCurrentItem(3);
+                slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+                item = 3;
                 break;
             case R.id.rb_tab_setting:
-                mViewPager.setCurrentItem(4);
+                slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+                item = 4;
                 break;
         }
+        // 点击不同的按钮切换ViewPager
+        mViewPager.setCurrentItem(item, false);
+
+        // 切换是联网获取数据
+        BaseFragment fragment = (BaseFragment) fragments.get(item);
+        if (fragment instanceof BaseLoadNetData) {
+            ((BaseLoadNetData)fragment).loadNetData();
+        }
+
     }
+
+    public SlidingMenu getSlidingMenu() {
+        return slidingMenu;
+    }
+
 }
