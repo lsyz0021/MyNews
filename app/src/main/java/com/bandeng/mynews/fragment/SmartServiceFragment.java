@@ -1,6 +1,5 @@
 package com.bandeng.mynews.fragment;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,7 +18,6 @@ public class SmartServiceFragment extends BaseFragment implements BaseLoadNetDat
 
         setMenuIsShow(true);
         setTypeIsShow(true);
-        Log.e("tag", "SmartService");
     }
 
     @Override

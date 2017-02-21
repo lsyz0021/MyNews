@@ -33,6 +33,10 @@ public abstract class BaseFragment extends Fragment {
 
     private MainActivity mMainActivity;
 
+    public void setTvFragmentTitle(String title) {
+        this.tvFragmentTitle.setText(title);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

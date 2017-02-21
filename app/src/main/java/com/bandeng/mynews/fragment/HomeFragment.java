@@ -1,18 +1,11 @@
 package com.bandeng.mynews.fragment;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bandeng.mynews.R;
 import com.bandeng.mynews.base.BaseFragment;
 import com.bandeng.mynews.base.BaseLoadNetData;
-import com.bandeng.mynews.utils.MyConstant;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.AbsCallback;
-
-import okhttp3.Call;
-import okhttp3.Response;
 
 
 /**
@@ -25,7 +18,6 @@ public class HomeFragment extends BaseFragment implements BaseLoadNetData {
     public void initTitle(View view) {
         setMenuIsShow(false);
         setTypeIsShow(false);
-        Log.e("tag", "home");
     }
 
     @Override

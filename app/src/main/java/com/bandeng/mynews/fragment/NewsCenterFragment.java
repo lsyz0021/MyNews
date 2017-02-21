@@ -1,6 +1,5 @@
 package com.bandeng.mynews.fragment;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -52,8 +51,8 @@ public class NewsCenterFragment extends BaseFragment implements BaseLoadNetData 
 
                         NewsCenterBean newsCenterBean = GsonUtils.json2Bean(s, NewsCenterBean.class);
 
-                        Log.e("tag", "新闻中心 newsCenterBean = " + newsCenterBean);
-                        getMainActivity().setNewsCenterMenuBeanList(newsCenterBean.data);
+                        if (newsCenterBean != null)
+                            getMainActivity().setNewsCenterMenuBeanList(newsCenterBean.data);
                     }
                 });
     }

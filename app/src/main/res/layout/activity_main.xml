@@ -7,14 +7,6 @@
     android:orientation="vertical"
     tools:context="com.bandeng.mynews.activity.MainActivity">
 
-    <com.viewpagerindicator.TabPageIndicator
-        android:id="@+id/tab_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/default_line_indicator_selected_color">
-
-    </com.viewpagerindicator.TabPageIndicator>
-
     <com.bandeng.mynews.view.NoScrollViewPager
         android:id="@+id/vp_ViewPager"
         android:layout_width="match_parent"

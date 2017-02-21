@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/color_black_ap"
     android:orientation="vertical">
 
-    <ImageView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_main_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/splash_bg" />
+        android:layout_marginTop="@dimen/large_100" />
 </LinearLayout>

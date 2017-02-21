@@ -12,4 +12,6 @@
     <color name="color_btn_text_pressed">#ff000000</color>
     <color name="color_btn_text_normal">#ffffffff</color>
 
+    <color name="color_black_ap">#000000</color>
+
 </resources>
