@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.bandeng.mynews.R;
+import com.bandeng.mynews.adapter.MenuAdapter;
 import com.bandeng.mynews.adapter.TabPagerAdapter;
 import com.bandeng.mynews.base.BaseFragment;
 import com.bandeng.mynews.base.BaseLoadNetData;
@@ -19,7 +22,6 @@ import com.bandeng.mynews.fragment.SettingFragment;
 import com.bandeng.mynews.fragment.SmartServiceFragment;
 import com.bandeng.mynews.view.NoScrollViewPager;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +38,12 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     private RadioButton rb_tab_setting;
     private SlidingMenu slidingMenu;
     private RadioGroup rg_radio_group;
-    private TabPageIndicator tabIndicator;
+    //    private TabPageIndicator tabIndicator;
     private ArrayList<Fragment> fragments;
 
     // 新闻中心menu bean list集合
-    private List<NewsCenterBean.NewsCenterMenuBean> newsCenterMenuBeanList;
+    private List<NewsCenterBean.NewsCenterMenuBean> newsCenterMenuBeanList = new ArrayList<>();
+    private MenuAdapter menuAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         initView();
         initData();
         initSlidingMenu();
+        initRecyclerView();
     }
 
     private void initSlidingMenu() {
@@ -70,12 +74,21 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         slidingMenu.setFadeDegree(0.5f);
         // 设置侧滑菜单的布局
         slidingMenu.setMenu(R.layout.main_menu);
+
     }
 
+    /**
+     * 初始化RecyclerView
+     */
+    private void initRecyclerView() {
+        RecyclerView rv_main_menu = (RecyclerView) slidingMenu.findViewById(R.id.rv_main_menu);
+        rv_main_menu.setLayoutManager(new LinearLayoutManager(this));
+        menuAdapter = new MenuAdapter(this, newsCenterMenuBeanList);
+        rv_main_menu.setAdapter(menuAdapter);
+    }
 
     private void initView() {
 
-        tabIndicator = (TabPageIndicator) findViewById(R.id.tab_indicator);
         mViewPager = (NoScrollViewPager) findViewById(R.id.vp_ViewPager);
         rg_radio_group = (RadioGroup) findViewById(R.id.rg_radio_group);
         rb_tab_home = (RadioButton) findViewById(R.id.rb_tab_home);
@@ -88,7 +101,6 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     }
 
     private void initData() {
-        String[] tab_title = {"新闻", "推荐", "视频", "北京", "直播"};
         fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new NewsCenterFragment());
@@ -96,12 +108,9 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         fragments.add(new GovaffairsFragment());
         fragments.add(new SettingFragment());
 
-        TabPagerAdapter pagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), fragments, tab_title);
+        TabPagerAdapter pagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), fragments);
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.addOnPageChangeListener(this);
-
-        tabIndicator.setViewPager(mViewPager);
-
     }
 
     @Override
@@ -177,6 +186,25 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     // 设置新闻中心menu bean list集合
     public void setNewsCenterMenuBeanList(List<NewsCenterBean.NewsCenterMenuBean> newsCenterMenuBeanList) {
         this.newsCenterMenuBeanList = newsCenterMenuBeanList;
+        menuAdapter.setList(newsCenterMenuBeanList);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (slidingMenu.isMenuShowing()) {
+            slidingMenu.toggle();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    /**
+     * 获取viewpager当前的fragment
+     *
+     * @return fragment
+     */
+    public BaseFragment getCurrentFragment() {
+
+        return (BaseFragment) fragments.get(mViewPager.getCurrentItem());
+    }
 }
