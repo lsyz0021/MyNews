@@ -3,7 +3,6 @@ package com.bandeng.mynews.fragment;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bandeng.mynews.R;
 import com.bandeng.mynews.base.BaseFragment;
 import com.bandeng.mynews.base.BaseLoadNetData;
 
@@ -19,11 +18,7 @@ public class SettingFragment extends BaseFragment implements BaseLoadNetData {
 
         setMenuIsShow(false);
         setTypeIsShow(false);
-    }
-
-    @Override
-    public String setTitleText() {
-        return getMainActivity().getResources().getString(R.string.tab_text_setting);
+        setTvFragmentTitle("我的");
     }
 
     @Override

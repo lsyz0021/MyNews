@@ -3,7 +3,6 @@ package com.bandeng.mynews.fragment;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bandeng.mynews.R;
 import com.bandeng.mynews.base.BaseFragment;
 import com.bandeng.mynews.base.BaseLoadNetData;
 import com.bandeng.mynews.bean.NewsCenterBean;
@@ -27,11 +26,7 @@ public class NewsCenterFragment extends BaseFragment implements BaseLoadNetData 
 
         setMenuIsShow(true);
         setTypeIsShow(true);
-    }
-
-    @Override
-    public String setTitleText() {
-        return getMainActivity().getResources().getString(R.string.tab_text_newscenter);
+        setTvFragmentTitle("新闻中心");
     }
 
     @Override
@@ -51,7 +46,7 @@ public class NewsCenterFragment extends BaseFragment implements BaseLoadNetData 
 
                         NewsCenterBean newsCenterBean = GsonUtils.json2Bean(s, NewsCenterBean.class);
 
-                        if (newsCenterBean != null)
+                        if (newsCenterBean != null && newsCenterBean.data != null)
                             getMainActivity().setNewsCenterMenuBeanList(newsCenterBean.data);
                     }
                 });

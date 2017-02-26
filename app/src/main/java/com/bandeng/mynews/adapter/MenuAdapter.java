@@ -70,8 +70,9 @@ public class MenuAdapter extends RecyclerView.Adapter {
                     notifyDataSetChanged();
                     BaseFragment currentFragment = ((MainActivity) context).getCurrentFragment();
                     currentFragment.setTvFragmentTitle(menuBean.title);
-                    ((MainActivity) context).getSlidingMenu().toggle();
                 }
+                // 点击条目之后关闭侧滑菜单
+                ((MainActivity) context).getSlidingMenu().toggle();
             }
         });
     }
