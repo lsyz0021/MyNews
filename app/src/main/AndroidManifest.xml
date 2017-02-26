@@ -14,10 +14,12 @@
         <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.SplashActivity"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
             android:name=".activity.GuideActivity"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
             <intent-filter>

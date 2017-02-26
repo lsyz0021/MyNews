@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         initView();
         initData();
         initSlidingMenu();
-        initRecyclerView();
+        initRecyclerView(); // 初始化侧滑菜单内容
     }
 
     private void initSlidingMenu() {
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         // 设置侧滑菜单的宽度
 //        slidingMenu.setBehindWidth(Uiutil.dip2px(this, 150));
         // 设置SlidingMenu离屏幕的偏移量
-        slidingMenu.setBehindOffsetRes(R.dimen.large_80);
+        slidingMenu.setBehindOffsetRes(R.dimen.large_150);
         // 把侧滑菜单添加到activity中
         slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         // 设置渐入渐出效果的值
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     }
 
     /**
-     * 初始化RecyclerView
+     * 初始化菜单RecyclerView
      */
     private void initRecyclerView() {
         RecyclerView rv_main_menu = (RecyclerView) slidingMenu.findViewById(R.id.rv_main_menu);
