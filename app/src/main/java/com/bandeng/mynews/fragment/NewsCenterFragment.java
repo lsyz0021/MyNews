@@ -1,23 +1,20 @@
 package com.bandeng.mynews.fragment;
 
-import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.bandeng.mynews.R;
 import com.bandeng.mynews.adapter.NewsCenterPagerAdapter;
 import com.bandeng.mynews.base.BaseFragment;
 import com.bandeng.mynews.base.BaseLoadNetData;
+import com.bandeng.mynews.base.NewsCenterTabContentPager;
 import com.bandeng.mynews.bean.NewsCenterBean;
 import com.bandeng.mynews.utils.GsonUtils;
 import com.bandeng.mynews.utils.MyConstant;
-import com.bandeng.mynews.utils.Uiutil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.viewpagerindicator.TabPageIndicator;
@@ -56,21 +53,31 @@ public class NewsCenterFragment extends BaseFragment implements BaseLoadNetData 
         viewPager = (ViewPager) view.findViewById(R.id.newscentercontent_viewpager);
 
         initViewPager();
+        // 设置indicate 的标题切换到下一个
+        img_newcenter_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentItem = viewPager.getCurrentItem();
+                if (currentItem != newsCenterBean.data.get(0).children.size()) {
+                    viewPager.setCurrentItem(++currentItem);
+                }
+
+            }
+        });
         return view;
     }
 
     private void initViewPager() {
-        ArrayList<View> viewPagerList = new ArrayList<>();
+        ArrayList<NewsCenterTabContentPager> viewPagerList = new ArrayList<>();
         ArrayList<NewsCenterBean.NewsCenterMenuBean> viewPagerListTitle = new ArrayList<>();
 
         for (NewsCenterBean.NewsCenterMenuBean.NewsCenterNewsTabBean tabBean
                 : newsCenterBean.data.get(0).children) {
-            TextView textView = new TextView(getMainActivity());
-            textView.setText(tabBean.title);
-            textView.setTextColor(Color.RED);
-            textView.setTextSize(Uiutil.dip2px(getMainActivity(), 16));
-            textView.setGravity(Gravity.CENTER);
-            viewPagerList.add(textView);
+
+            NewsCenterTabContentPager contentPager = new NewsCenterTabContentPager(getContext());
+
+
+            viewPagerList.add(contentPager);
         }
         // 设置 Indicator的标题
         viewPagerListTitle.add(newsCenterBean.data.get(0));

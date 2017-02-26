@@ -4,7 +4,9 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bandeng.mynews.base.NewsCenterTabContentPager;
 import com.bandeng.mynews.bean.NewsCenterBean;
+import com.bandeng.mynews.utils.MyConstant;
 
 import java.util.List;
 
@@ -13,10 +15,10 @@ import java.util.List;
  */
 
 public class NewsCenterPagerAdapter extends PagerAdapter {
-    private List<View> viewPagerList;
+    private List<NewsCenterTabContentPager> viewPagerList;
     private List<NewsCenterBean.NewsCenterMenuBean> viewPagerListTitle;
 
-    public NewsCenterPagerAdapter(List<View> viewPagerList
+    public NewsCenterPagerAdapter(List<NewsCenterTabContentPager> viewPagerList
             , List<NewsCenterBean.NewsCenterMenuBean> viewPagerListTitle) {
         this.viewPagerList = viewPagerList;
         this.viewPagerListTitle = viewPagerListTitle;
@@ -35,8 +37,12 @@ public class NewsCenterPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = viewPagerList.get(position);
+        View view = viewPagerList.get(position).getView();
         container.addView(view);
+        // 加载tab对应的content数据
+        NewsCenterTabContentPager tabContentPager = viewPagerList.get(position);
+        String url = MyConstant.HOST + viewPagerListTitle.get(0).children.get(position).url;
+        tabContentPager.loadData(url);
         return view;
     }
 

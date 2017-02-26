@@ -50,7 +50,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mMainActivity = (MainActivity) getActivity();
 
         initTitle(view);
 
@@ -104,6 +103,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public MainActivity getMainActivity() {
+        mMainActivity = (MainActivity) getActivity();
         return mMainActivity;
     }
 

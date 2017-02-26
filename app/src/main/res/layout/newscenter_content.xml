@@ -16,9 +16,9 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/small_5"
-            android:src="@drawable/news_cate_arr"
             android:background="@android:color/white"
-            android:paddingRight="@dimen/small_5" />
+            android:paddingRight="@dimen/small_5"
+            android:src="@drawable/news_cate_arr" />
 
         <com.viewpagerindicator.TabPageIndicator
             android:id="@+id/newscenter_tabIndictor"
