@@ -16,15 +16,15 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/small_5"
-            android:background="@drawable/news_cate_arr"
+            android:src="@drawable/news_cate_arr"
+            android:background="@android:color/white"
             android:paddingRight="@dimen/small_5" />
 
         <com.viewpagerindicator.TabPageIndicator
             android:id="@+id/newscenter_tabIndictor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/img_newcenter_left"
-            android:background="@color/color_tab_text_checked" />
+            android:layout_toLeftOf="@+id/img_newcenter_left" />
 
     </RelativeLayout>
 
