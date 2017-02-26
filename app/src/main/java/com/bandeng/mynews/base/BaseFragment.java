@@ -53,7 +53,7 @@ public abstract class BaseFragment extends Fragment {
         mMainActivity = (MainActivity) getActivity();
 
         initTitle(view);
-        tvFragmentTitle.setText(setTitleText());
+
         fragmentContainerAddView(setFragmentContainerView());
     }
 
@@ -84,11 +84,6 @@ public abstract class BaseFragment extends Fragment {
      * 初始化title
      */
     public abstract void initTitle(View view);
-
-    /**
-     * 设置标题
-     */
-    public abstract String setTitleText();
 
     /**
      * 设置fragment的内容

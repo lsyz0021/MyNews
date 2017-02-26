@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
      */
     private void initRecyclerView() {
         RecyclerView rv_main_menu = (RecyclerView) slidingMenu.findViewById(R.id.rv_main_menu);
+        // 水平方向
         rv_main_menu.setLayoutManager(new LinearLayoutManager(this));
         menuAdapter = new MenuAdapter(this, newsCenterMenuBeanList);
         rv_main_menu.setAdapter(menuAdapter);
