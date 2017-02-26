@@ -54,7 +54,7 @@ public abstract class BaseFragment extends Fragment {
 
         initTitle(view);
 
-        fragmentContainerAddView(setFragmentContainerView());
+//        fragmentContainerAddView(setFragmentContainerView());
     }
 
     /**
