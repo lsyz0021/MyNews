@@ -72,6 +72,7 @@ public class NewsCenterFragment extends BaseFragment implements BaseLoadNetData 
             textView.setGravity(Gravity.CENTER);
             viewPagerList.add(textView);
         }
+        // 设置 Indicator的标题
         viewPagerListTitle.add(newsCenterBean.data.get(0));
 
         NewsCenterPagerAdapter pagerAdapter = new NewsCenterPagerAdapter(viewPagerList, viewPagerListTitle);
