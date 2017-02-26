@@ -32,7 +32,6 @@ import okhttp3.Response;
 public class NewsCenterFragment extends BaseFragment implements BaseLoadNetData {
 
     private TabPageIndicator tabPageIndicator;
-    private ImageButton img_newcenter_left;
     private ViewPager viewPager;
     private NewsCenterBean newsCenterBean = new NewsCenterBean();
 
@@ -49,7 +48,7 @@ public class NewsCenterFragment extends BaseFragment implements BaseLoadNetData 
 
         View view = LayoutInflater.from(getMainActivity()).inflate(R.layout.newscenter_content, (ViewGroup) getView(), false);
         tabPageIndicator = (TabPageIndicator) view.findViewById(R.id.newscenter_tabIndictor);
-        img_newcenter_left = (ImageButton) view.findViewById(R.id.img_newcenter_left);
+        ImageButton img_newcenter_left = (ImageButton) view.findViewById(R.id.img_newcenter_left);
         viewPager = (ViewPager) view.findViewById(R.id.newscentercontent_viewpager);
 
         initViewPager();
@@ -102,7 +101,7 @@ public class NewsCenterFragment extends BaseFragment implements BaseLoadNetData 
     }
 
     /**
-     * 将json转化成对应的数据模型
+     * 将tab对应的内容json转化成对应的数据模型
      */
     private void processData(String s) {
 
