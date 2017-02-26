@@ -56,6 +56,17 @@ public class NewsCenterFragment extends BaseFragment implements BaseLoadNetData 
         viewPager = (ViewPager) view.findViewById(R.id.newscentercontent_viewpager);
 
         initViewPager();
+        // 设置indicate 的标题切换到下一个
+        img_newcenter_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentItem = viewPager.getCurrentItem();
+                if (currentItem != newsCenterBean.data.get(0).children.size()) {
+                    viewPager.setCurrentItem(++currentItem);
+                }
+
+            }
+        });
         return view;
     }
 
