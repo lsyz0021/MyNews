@@ -1,6 +1,7 @@
 package com.bandeng.mynews.base;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -41,6 +42,42 @@ public class NewsCenterTabContentPager {
     private Context context;
     private View view;
     private NewsCenterTabContentBean tabContentBean;
+    // 自动轮播
+    private Handler mhandler = new Handler();
+    private ArrayList<ImageView> imageViews;
+
+    /**
+     * 开始切换
+     */
+    public void startSwitch() {
+
+        mhandler.postDelayed(new MyRunnable(), 3000);
+    }
+
+    /**
+     * 停止切换
+     */
+    public void stopSwitch() {
+        mhandler.removeCallbacksAndMessages(null);
+    }
+
+    // 自动轮播
+    private class MyRunnable implements Runnable {
+        @Override
+        public void run() {
+            int currentItem = vpViewpager.getCurrentItem();
+
+            if (imageViews != null) {
+                if (currentItem == imageViews.size() - 1) {
+                    currentItem = 0;
+                } else {
+                    currentItem++;
+                }
+                vpViewpager.setCurrentItem(currentItem);
+                mhandler.postDelayed(new MyRunnable(), 3000);
+            }
+        }
+    }
 
     public NewsCenterTabContentPager(Context context) {
         this.context = context;
@@ -84,7 +121,7 @@ public class NewsCenterTabContentPager {
      */
     private void processData(String json) {
         tabContentBean = GsonUtils.json2Bean(json, NewsCenterTabContentBean.class);
-        ArrayList<ImageView> imageViews = new ArrayList<>();
+        imageViews = new ArrayList<>();
         ArrayList<String> titles = new ArrayList<>();
         // 给ViewPager设置数据
         final List<NewsCenterTabContentBean.DataBean.TopnewsBean> topnews = tabContentBean.data.topnews;

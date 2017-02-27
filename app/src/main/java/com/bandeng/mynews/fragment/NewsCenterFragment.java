@@ -67,7 +67,7 @@ public class NewsCenterFragment extends BaseFragment implements BaseLoadNetData 
     }
 
     private void initViewPager() {
-        ArrayList<NewsCenterTabContentPager> viewPagerList = new ArrayList<>();
+        final ArrayList<NewsCenterTabContentPager> viewPagerList = new ArrayList<>();
         ArrayList<NewsCenterBean.NewsCenterMenuBean> viewPagerListTitle = new ArrayList<>();
 
         for (NewsCenterBean.NewsCenterMenuBean.NewsCenterNewsTabBean tabBean
@@ -84,6 +84,34 @@ public class NewsCenterFragment extends BaseFragment implements BaseLoadNetData 
         NewsCenterPagerAdapter pagerAdapter = new NewsCenterPagerAdapter(viewPagerList, viewPagerListTitle);
         viewPager.setAdapter(pagerAdapter);
         tabPageIndicator.setViewPager(viewPager);
+
+        // 开启tab轮播图自动切换
+        NewsCenterTabContentPager tabContentPager = viewPagerList.get(0);
+        tabContentPager.startSwitch();
+        tabPageIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                int currentItem = viewPager.getCurrentItem();
+                for (int i = 0; i < viewPagerList.size(); i++) {
+                    NewsCenterTabContentPager contentPager = viewPagerList.get(i);
+                    if (currentItem == i) {
+                        contentPager.startSwitch();
+                    } else {
+                        contentPager.stopSwitch();
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
