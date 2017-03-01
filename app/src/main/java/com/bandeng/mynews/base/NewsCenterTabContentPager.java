@@ -16,6 +16,7 @@ import com.bandeng.mynews.bean.NewsCenterTabContentBean;
 import com.bandeng.mynews.utils.GsonUtils;
 import com.bandeng.mynews.utils.MyConstant;
 import com.bandeng.mynews.utils.Uiutil;
+import com.bandeng.mynews.view.SwitchImageViewPager;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.squareup.picasso.Picasso;
@@ -34,7 +35,7 @@ import okhttp3.Response;
 
 public class NewsCenterTabContentPager {
     @BindView(R.id.vp_news_tab_content_viewpager)
-    ViewPager vpViewpager;
+    SwitchImageViewPager vpViewpager;
     @BindView(R.id.tv_news_tab_content)
     TextView tvNewsTabContent;
     @BindView(R.id.ll_news_tab_content)
@@ -143,7 +144,7 @@ public class NewsCenterTabContentPager {
 
         NewsCenterTabContentPagerAdapter pagerAdapter = new NewsCenterTabContentPagerAdapter(imageViews, titles);
         vpViewpager.setAdapter(pagerAdapter);
-
+        vpViewpager.setTabContentPager(this);
         vpViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/large_150">
 
-        <android.support.v4.view.ViewPager
+        <com.bandeng.mynews.view.SwitchImageViewPager
             android:id="@+id/vp_news_tab_content_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
