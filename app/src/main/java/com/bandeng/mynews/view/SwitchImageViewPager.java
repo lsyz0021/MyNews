@@ -26,15 +26,28 @@ public class SwitchImageViewPager extends ViewPager {
         super(context, attrs);
     }
 
+    private int startX;
+    private int startY;
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
 
             case MotionEvent.ACTION_DOWN:
+                startX = (int) ev.getX();
+                startY = (int) ev.getY();
                 tabContentPager.stopSwitch();
                 break;
             case MotionEvent.ACTION_MOVE:
+                int moveX = (int) ev.getX();
+                int moveY = (int) ev.getY();
+                int disX = moveX - startX;
+                int disY = moveY - startY;
+                // 水平滑动并且向右
+                if (Math.abs(disX) > Math.abs(disY) && disX > 0) {
+                    // 请求外层控件不拦截
+                    requestDisallowInterceptTouchEvent(true);
+                }
 
                 break;
             case MotionEvent.ACTION_UP:

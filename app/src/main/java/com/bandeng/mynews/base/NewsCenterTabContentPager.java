@@ -124,12 +124,22 @@ public class NewsCenterTabContentPager {
         tabContentBean = GsonUtils.json2Bean(json, NewsCenterTabContentBean.class);
         imageViews = new ArrayList<>();
         ArrayList<String> titles = new ArrayList<>();
+        NewsCenterTabContentBean.DataBean.TopnewsBean topnewsBean;
         // 给ViewPager设置数据
         final List<NewsCenterTabContentBean.DataBean.TopnewsBean> topnews = tabContentBean.data.topnews;
-        for (int i = 0; i < topnews.size(); i++) {
+        int size = topnews.size();
+        // 给第一个位置添加最后一个元素，最后的位置添加第一个元素
+        for (int i = -1; i < size + 1; i++) {
+            if (i == -1) {
+                topnewsBean = topnews.get(size - 1);
+            } else if (i == size) {
+                topnewsBean = topnews.get(0);
+            } else {
+                topnewsBean = topnews.get(i);
+            }
+
             ImageView imageView = new ImageView(context);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            NewsCenterTabContentBean.DataBean.TopnewsBean topnewsBean = topnews.get(i);
             // 由于外网服务器不可用，我们变成本地数据
             String[] split = topnewsBean.topimage.split(":8080");
             String url = MyConstant.BASEURL + split[1];
@@ -145,6 +155,9 @@ public class NewsCenterTabContentPager {
         NewsCenterTabContentPagerAdapter pagerAdapter = new NewsCenterTabContentPagerAdapter(imageViews, titles);
         vpViewpager.setAdapter(pagerAdapter);
         vpViewpager.setTabContentPager(this);
+
+        vpViewpager.setCurrentItem(1, false);
+
         vpViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -152,14 +165,28 @@ public class NewsCenterTabContentPager {
 
             @Override
             public void onPageSelected(int position) {
+
+                int pageIndex = 0;
+                if (position == 0) {
+                    pageIndex = topnews.size() - 1;
+                    //切换到最后一个页面
+                    vpViewpager.setCurrentItem(topnews.size(), false);
+                } else if (position == topnews.size() + 1) {
+                    pageIndex = 0;
+                    //切换到第一个页面
+                    vpViewpager.setCurrentItem(1, false);
+                } else {
+                    pageIndex = position - 1;
+                }
+
                 // 文字随着图片的切换而切换
-                tvNewsTabContent.setText(topnews.get(position).title);
+                tvNewsTabContent.setText(topnews.get(pageIndex).title);
 
                 // 小圆点随着滚动
                 int childCount = llNewsTabContent.getChildCount();
                 for (int i = 0; i < childCount; i++) {
                     View childAt = llNewsTabContent.getChildAt(i);
-                    if (position == i) {
+                    if (pageIndex == i) {
                         childAt.setBackgroundResource(R.drawable.guide_red_point_shape);
                     } else {
                         childAt.setBackgroundResource(R.drawable.guide_gray_point_shape);
