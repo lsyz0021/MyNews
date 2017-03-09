@@ -3,6 +3,8 @@ package com.bandeng.mynews.base;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.bandeng.mynews.R;
 import com.bandeng.mynews.adapter.NewsCenterTabContentPagerAdapter;
+import com.bandeng.mynews.adapter.NewsRecyclerViewAdapter;
 import com.bandeng.mynews.bean.NewsCenterTabContentBean;
 import com.bandeng.mynews.utils.GsonUtils;
 import com.bandeng.mynews.utils.MyConstant;
@@ -40,6 +43,8 @@ public class NewsCenterTabContentPager {
     TextView tvNewsTabContent;
     @BindView(R.id.ll_news_tab_content)
     LinearLayout llNewsTabContent;
+    @BindView(R.id.rl_newsCentertabContentPager)
+    RecyclerView rl_RecyclerView;
     private Context context;
     private View view;
     private NewsCenterTabContentBean tabContentBean;
@@ -122,11 +127,32 @@ public class NewsCenterTabContentPager {
      */
     private void processData(String json) {
         tabContentBean = GsonUtils.json2Bean(json, NewsCenterTabContentBean.class);
+        List<NewsCenterTabContentBean.DataBean.TopnewsBean> topnews = tabContentBean.data.topnews;
+        List<NewsCenterTabContentBean.DataBean.NewsBean> news = tabContentBean.data.news;
+        //把数据绑定给对应的控件
+        bindDataToView(topnews, news);
+    }
+
+    private void bindDataToView(List<NewsCenterTabContentBean.DataBean.TopnewsBean> topnews
+            , List<NewsCenterTabContentBean.DataBean.NewsBean> news) {
+        // 切换图片
+        initSwitchImageView(topnews);
+        // 初始化圆点
+        initPoint(topnews);
+        // 初始化RecyclerView
+        initRecyclerView(news);
+    }
+
+    /**
+     * 加载图片，并绑定到Viewpager上
+     *
+     * @param topnews
+     */
+    private void initSwitchImageView(final List<NewsCenterTabContentBean.DataBean.TopnewsBean> topnews) {
         imageViews = new ArrayList<>();
         ArrayList<String> titles = new ArrayList<>();
         NewsCenterTabContentBean.DataBean.TopnewsBean topnewsBean;
         // 给ViewPager设置数据
-        final List<NewsCenterTabContentBean.DataBean.TopnewsBean> topnews = tabContentBean.data.topnews;
         int size = topnews.size();
         // 给第一个位置添加最后一个元素，最后的位置添加第一个元素
         for (int i = -1; i < size + 1; i++) {
@@ -149,8 +175,7 @@ public class NewsCenterTabContentPager {
         String title = topnews.get(0).title;
         tvNewsTabContent.setText(title);
         titles.add(title);
-        // 初始化圆点
-        initPoint(topnews);
+
 
         NewsCenterTabContentPagerAdapter pagerAdapter = new NewsCenterTabContentPagerAdapter(imageViews, titles);
         vpViewpager.setAdapter(pagerAdapter);
@@ -217,5 +242,21 @@ public class NewsCenterTabContentPager {
             llNewsTabContent.addView(view);
         }
         llNewsTabContent.getChildAt(0).setBackgroundResource(R.drawable.guide_red_point_shape);
+    }
+
+
+    /**
+     * 初始化recyclerView
+     *
+     * @param news 列表的数据集合
+     */
+    private void initRecyclerView(List<NewsCenterTabContentBean.DataBean.NewsBean> news) {
+
+        // 设置布局管理器
+        rl_RecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        // 设置条目分割线
+//        rl_RecyclerView.addItemDecoration(new RecycleViewDivider());
+        NewsRecyclerViewAdapter recyclerViewAdapter = new NewsRecyclerViewAdapter(context, news);
+        rl_RecyclerView.setAdapter(recyclerViewAdapter);
     }
 }
