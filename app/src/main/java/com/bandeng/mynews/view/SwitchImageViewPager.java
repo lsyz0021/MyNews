@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.bandeng.mynews.base.NewsCenterTabContentPager;
 
@@ -51,6 +52,13 @@ public class SwitchImageViewPager extends ViewPager {
 
                 break;
             case MotionEvent.ACTION_UP:
+                int upX = (int) ev.getX();
+                int upY = (int) ev.getY();
+                // 这里说明我们点击了ViewPager
+                if (startX == upX && startY == upY) {
+                    Toast.makeText(getContext(), "点击了ViewPager", Toast.LENGTH_LONG).show();
+                }
+                // 按下ViewPager暂停自动切换，释放后开始自动切换
                 tabContentPager.startSwitch();
                 break;
         }
