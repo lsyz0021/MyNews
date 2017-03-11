@@ -1,6 +1,7 @@
 package com.bandeng.mynews.base;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import com.bandeng.mynews.bean.NewsCenterTabContentBean;
 import com.bandeng.mynews.utils.GsonUtils;
 import com.bandeng.mynews.utils.MyConstant;
 import com.bandeng.mynews.utils.Uiutil;
+import com.bandeng.mynews.view.RecycleViewDivider;
 import com.bandeng.mynews.view.SwitchImageViewPager;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -255,7 +257,7 @@ public class NewsCenterTabContentPager {
         // 设置布局管理器
         rl_RecyclerView.setLayoutManager(new LinearLayoutManager(context));
         // 设置条目分割线
-//        rl_RecyclerView.addItemDecoration(new RecycleViewDivider());
+        rl_RecyclerView.addItemDecoration(new RecycleViewDivider(context, LinearLayoutManager.HORIZONTAL, 2, Color.BLUE));
         NewsRecyclerViewAdapter recyclerViewAdapter = new NewsRecyclerViewAdapter(context, news);
         rl_RecyclerView.setAdapter(recyclerViewAdapter);
     }
